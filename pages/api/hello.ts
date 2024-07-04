@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-const { MongoClient, ServerApiVersion } = require("mongodb");
+import { MongoClient, ServerApiVersion } from "mongodb";
+// const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri =
   "mongodb+srv://tienluc0811:UlPQGb34u11jlKXz@cluster0.dpevir0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
@@ -17,8 +18,7 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    return "Pinged your deployment. You successfully connected to MongoDB!";
+    return await client.db("MaiToc").collection("Member").find();
   } catch (err) {
     return err as any;
   } finally {

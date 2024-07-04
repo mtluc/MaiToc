@@ -13,14 +13,25 @@ const client = new MongoClient(uri, {
   },
 });
 
+interface IMember {
+  _id: any;
+  name: string;
+}
+
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
-    return await client.db("MaiToc").collection("Member").find({});
+    const list = await client
+      .db("MaiToc")
+      .collection<IMember>("Member")
+      .find({})
+      .toArray();
+
+    return list;
   } catch (err) {
-    return err as any;
+    throw err;
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
@@ -28,7 +39,7 @@ async function run() {
 }
 
 type Data = {
-  name: string;
+  name: any;
 };
 
 export default async function handler(

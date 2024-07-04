@@ -38,14 +38,9 @@ async function run() {
   }
 }
 
-type Data = {
-  name: any;
-};
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<IMember[]>
 ) {
-  const _run = await run();
-  res.status(200).json({ name: _run });
+  res.status(200).json(await run());
 }

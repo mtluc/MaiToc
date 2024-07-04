@@ -18,7 +18,7 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
-    return await client.db("MaiToc").collection("Member").find();
+    return await client.db("MaiToc").collection("Member").find({});
   } catch (err) {
     return err as any;
   } finally {
